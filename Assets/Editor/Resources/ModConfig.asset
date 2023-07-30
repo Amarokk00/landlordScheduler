@@ -1,0 +1,31 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 615501dbe4f3fe94fbf4b564abb10237, type: 3}
+  m_Name: ModConfig
+  m_EditorClassIdentifier: 
+  id: landlordscheduler
+  title: Shiro's landlord scheduling
+  author: Amarok
+  description: 'Keep shatting and somebody explodes.
+
+
+    mod made for @shiro__nya
+
+
+    Shiro''s landlord is bugging shiro to schedule a visit :(
+
+
+    Require camera zoom or extremly good eyesight to see the phone.
+
+    (module will autosolve if phone is not found)'
+  version: 1
+  outputFolder: build
+  previewImage: {fileID: 2800000, guid: ddddba01b403b4b4ea6db14c655840e6, type: 3}
