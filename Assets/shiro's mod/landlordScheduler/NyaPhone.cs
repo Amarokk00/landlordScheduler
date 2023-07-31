@@ -4,31 +4,37 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class NyaPhone : MonoBehaviour
+public class NyaPhone : MonoBehaviour, PhoneInfo
 {
+
+    public event OnAppLoadedHandler OnAppLoaded;
+    public event OnHomePressHandler OnHomePress;
+
     public KMBombInfo BombInfo;
     public KMSelectable HomeButton;
     public TextMesh timetext;
     public TextMesh datetext;
-    public List<GameObject> appAreas;
+
     public Material screen;
+    public KMSelectable phoneSelectable;
     public GameObject Apps;
     public GameObject phoneScreen;
-    public KMSelectable phoneSelectable;
-    public GameObject screenArea;
+    List<GameObject> appAreas = new List<GameObject>();
 
     int index = 0;
 
-    public delegate bool OnAppLoadedHandler();
-    public OnAppLoadedHandler OnAppLoaded;
-
-    public delegate bool OnHomePressHandler();
-    public OnHomePressHandler OnHomePress;
+    List<string> loadedmodules = new List<string>();
 
     void Start()
     {
+        phoneScreen = this.transform.Find("phoneScreen").gameObject;
+        Apps = this.transform.Find("AppArea").gameObject;
 
-        screenArea = Instantiate(screenArea);
+        foreach (Transform t in Apps.transform)
+        {
+            appAreas.Add(t.gameObject);
+        }
+
         HomeButton.OnInteract += delegate ()
         {
             home();
@@ -40,38 +46,6 @@ public class NyaPhone : MonoBehaviour
         string theTime = System.DateTime.Now.ToString("HH:mm");
         timetext.text = theTime;
 
-        searchApps();
-    }
-
-    void searchApps()
-    {
-        List<string> modules = BombInfo.GetModuleIDs();
-        modules = modules.Distinct().ToList();
-
-        foreach (string module in modules)
-        {
-            GameObject nyapp = GameObject.Find(module + "(Clone)/nyapp");
-            if (nyapp != null)
-            {
-                loadApp(nyapp.gameObject, module);
-            }
-        }
-        try
-        {
-            foreach (string module in modules)
-            {
-                GameObject nyapp = GameObject.Find(module + "/nyapp");
-                if (nyapp != null)
-                {
-                    loadApp(nyapp.gameObject, module);
-                }
-            }
-        }
-        catch
-        {
-            
-
-        }
     }
 
     void FixedUpdate()
@@ -98,10 +72,11 @@ public class NyaPhone : MonoBehaviour
         Apps.SetActive(true);
     }
 
-    void loadApp(GameObject app, string module)
+    public void loadApp(GameObject app, string module)
     {
-        if (index <= appAreas.Count() - 1)
+        if (index <= appAreas.Count() - 1 && !loadedmodules.Contains(module))
         {
+            loadedmodules.Add(module);
             GameObject area = appAreas[index];
 
             area.name = "nyapp_" + module;
@@ -126,7 +101,9 @@ public class NyaPhone : MonoBehaviour
 
 
             index++;
+
             OnAppLoaded();
+
         }
 
 
@@ -161,3 +138,4 @@ public class NyaPhone : MonoBehaviour
 
     }
 }
+

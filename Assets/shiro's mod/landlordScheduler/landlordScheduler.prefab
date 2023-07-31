@@ -281,7 +281,6 @@ GameObject:
   - component: {fileID: 114711886080594390}
   - component: {fileID: 114455519006242230}
   - component: {fileID: 114012305561187454}
-  - component: {fileID: 114275471987362426}
   m_Layer: 0
   m_Name: nyapp
   m_TagString: Untagged
@@ -1010,8 +1009,8 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1336607366500234}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0.03}
-  m_LocalScale: {x: 0.02, y: 0.01, z: 0.019999996}
+  m_LocalPosition: {x: 0, y: 0.003, z: 0.03}
+  m_LocalScale: {x: 0.02, y: 0.001, z: 0.019999996}
   m_Children:
   - {fileID: 4422082385769868}
   m_Father: {fileID: 4720414032370450}
@@ -1037,8 +1036,8 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1446513636899828}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: -0.03}
-  m_LocalScale: {x: 0.02, y: 0.01, z: 0.019999996}
+  m_LocalPosition: {x: 0, y: 0.003, z: -0.03}
+  m_LocalScale: {x: 0.02, y: 0.001, z: 0.019999996}
   m_Children:
   - {fileID: 4511521851255186}
   m_Father: {fileID: 4720414032370450}
@@ -1119,8 +1118,8 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1032777488292026}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: -0.03}
-  m_LocalScale: {x: 0.02, y: 0.01, z: 0.019999996}
+  m_LocalPosition: {x: 0, y: 0.003, z: -0.03}
+  m_LocalScale: {x: 0.02, y: 0.001, z: 0.019999996}
   m_Children:
   - {fileID: 4934791530143696}
   m_Father: {fileID: 4062945579152334}
@@ -1159,8 +1158,8 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1161326386611150}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0.03}
-  m_LocalScale: {x: 0.02, y: 0.01, z: 0.019999996}
+  m_LocalPosition: {x: 0, y: 0.003, z: 0.03}
+  m_LocalScale: {x: 0.02, y: 0.001, z: 0.019999996}
   m_Children:
   - {fileID: 4941122362045310}
   m_Father: {fileID: 4062945579152334}
@@ -1173,7 +1172,7 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1078686640231750}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0, y: -0.002, z: 0}
+  m_LocalPosition: {x: 0, y: 0.0031, z: 0}
   m_LocalScale: {x: 0.0565, y: 0.0001, z: 0.10505}
   m_Children:
   - {fileID: 4778763709461276}
@@ -1272,8 +1271,8 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1722354705455986}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0.03}
-  m_LocalScale: {x: 0.02, y: 0.01, z: 0.019999996}
+  m_LocalPosition: {x: 0, y: 0.003, z: 0.03}
+  m_LocalScale: {x: 0.02, y: 0.001, z: 0.019999996}
   m_Children:
   - {fileID: 4069472436151226}
   m_Father: {fileID: 4309660532514676}
@@ -1327,8 +1326,8 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1336337054089804}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: -0.03}
-  m_LocalScale: {x: 0.02, y: 0.01, z: 0.019999996}
+  m_LocalPosition: {x: 0, y: 0.003, z: -0.03}
+  m_LocalScale: {x: 0.02, y: 0.001, z: 0.019999996}
   m_Children:
   - {fileID: 4027554826527926}
   m_Father: {fileID: 4309660532514676}
@@ -3573,27 +3572,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   ShaderNames:
   - GUI/KT 3D Text
---- !u!114 &114275471987362426
-MonoBehaviour:
-  m_ObjectHideFlags: 1
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1376717299798864}
-  m_Enabled: 0
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 350d098c9c28c0441a9a1a8efa2c7e90, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  BombInfo: {fileID: 0}
-  HomeButton: {fileID: 0}
-  timetext: {fileID: 0}
-  datetext: {fileID: 0}
-  appAreas: []
-  screen: {fileID: 0}
-  Apps: {fileID: 0}
-  phoneScreen: {fileID: 0}
-  phoneSelectable: {fileID: 0}
-  screenArea: {fileID: 0}
 --- !u!114 &114282643501372984
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -3605,7 +3583,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 23211f8cb415eb14fba65e529fa87b87, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  app: {fileID: 0}
+  nyapp: {fileID: 1376717299798864}
+  app: {fileID: 114397493468173310}
   BombInfo: {fileID: 114016119432772590}
   BombModule: {fileID: 114825098575475566}
   DayText: {fileID: 102421092878408914}

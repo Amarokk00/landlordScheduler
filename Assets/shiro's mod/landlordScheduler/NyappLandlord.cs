@@ -31,7 +31,7 @@ public class NyappLandlord : MonoBehaviour
 
 	public List<landlordScheduler> modules;
 	bool home = true;
-
+	float striketimer = 0;
 
 	string correctChoice = "";
 	string reply1Correct = "";
@@ -64,10 +64,10 @@ public class NyappLandlord : MonoBehaviour
 	{
 		if (!loaded)
 		{
-			activation = UnityEngine.Random.Range(20, 50);
+			activation = UnityEngine.Random.Range(10, 30);
 			Debug.Log("======activation======" + activation);
 			loaded = true;
-			NyaPhone phone = GameObject.Find("NyaPhone(Clone)").GetComponent<NyaPhone>();
+			PhoneInfo phone = GameObject.Find("NyaPhone(Clone)").GetComponent<PhoneInfo>();
 
 			phone.OnHomePress += delegate ()
 			{
@@ -117,7 +117,7 @@ public class NyappLandlord : MonoBehaviour
 			running = true;
 			loadScreen();
 			getMessage();
-			if (activation == 50) { activation = 20; } else { activation++; }
+			activation = UnityEngine.Random.Range(30, 50);
 		}
 		if (int.Parse(timerText.Substring(3)) == activation && running && response.text != "")
 		{
@@ -125,15 +125,16 @@ public class NyappLandlord : MonoBehaviour
 			running = false;
 			runningIndex++;
 			if (runningIndex >= modules.Count) { runningIndex = 0; }
-			if (activation == 50) { activation = 20; } else { activation++; }
+			activation = UnityEngine.Random.Range(10, 30);
 
 		}
-		if (int.Parse(timerText.Substring(3)) == activation && waitingresponse)
+		if (striketimer > 30 && waitingresponse)
 		{
 			modules[runningIndex].BombModule.HandleStrike();
 			waitingresponse = false;
 		}
-
+		striketimer += 1f/60f;
+		
 	}
 	void loadScreen()
 	{
@@ -148,6 +149,7 @@ public class NyappLandlord : MonoBehaviour
 	void getMessage()
 	{
 		KMAudio.PlaySoundAtTransform("shiromeow", this.transform);
+		striketimer = 0;
 		waitingresponse = true;
 		if (!home) { message.transform.parent.Find("message").gameObject.SetActive(true); }
 

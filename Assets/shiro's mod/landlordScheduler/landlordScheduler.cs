@@ -5,8 +5,10 @@ using System.Collections.Generic;
 using Newtonsoft.Json;
 using UnityEngine.Rendering;
 
+
 public class landlordScheduler : MonoBehaviour
 {
+    public GameObject nyapp;
     public NyappLandlord app;
     public KMBombInfo BombInfo;
     public KMBombModule BombModule;
@@ -34,6 +36,7 @@ public class landlordScheduler : MonoBehaviour
     int todayYear = 2023;
 
     public List<DateTime> validDates = new List<DateTime>();
+    PhoneInfo phone;
 
     void loadApp()
     {
@@ -41,12 +44,13 @@ public class landlordScheduler : MonoBehaviour
         app.modules.Add(this);
         app.loadApp();
     }
-    void Start()
+    void ActivateModule()
     {
+        
         try
         {
-            NyaPhone phone = GameObject.Find("NyaPhone(Clone)").GetComponent<NyaPhone>();
-
+            phone = GameObject.Find("NyaPhone(Clone)").GetComponent<PhoneInfo>();
+            
             phone.OnAppLoaded += delegate ()
             {
                 loadApp();
@@ -62,10 +66,17 @@ public class landlordScheduler : MonoBehaviour
         catch (Exception e)
         {
             Debug.Log("[Landlord Scheduler Error] " + e);
-            Debug.Log("[Landlord Scheduler] Phone not found. Passing module");
             BombModule.HandlePass();
         }
 
+        phone.loadApp(nyapp,"landlordScheduler");
+    }
+    
+    void Start()
+    {
+
+        GetComponent<KMBombModule>().OnActivate += ActivateModule;
+        
 
         System.Random random = new System.Random();
 
@@ -74,8 +85,6 @@ public class landlordScheduler : MonoBehaviour
             DateTime rngDate = DateTime.Now.AddDays(random.Next(1, 1095));
             validDates.Add(rngDate);
         }
-
-
 
         todayDay = int.Parse(System.DateTime.Now.ToString("dd"));
         Day = todayDay;
@@ -233,3 +242,4 @@ public class landlordScheduler : MonoBehaviour
 
     }
 }
+
