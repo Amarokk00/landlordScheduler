@@ -120,7 +120,7 @@ GameObject:
   - component: {fileID: 114162507060706136}
   - component: {fileID: 114711886545282520}
   m_Layer: 0
-  m_Name: Home Button
+  m_Name: HomeButton
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -213,6 +213,7 @@ GameObject:
   - component: {fileID: 114099712622551118}
   - component: {fileID: 114760416156784776}
   - component: {fileID: 114964789883908302}
+  - component: {fileID: 114037704698163004}
   m_Layer: 0
   m_Name: NyaPhone
   m_TagString: Untagged
@@ -1197,6 +1198,18 @@ TextMesh:
   m_Color:
     serializedVersion: 2
     rgba: 4278190080
+--- !u!114 &114037704698163004
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1670036204633318}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: cf70d8fa31b19b84f99686c9ea99510c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  PhoneExist: 0
 --- !u!114 &114045286528348816
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -1955,24 +1968,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 350d098c9c28c0441a9a1a8efa2c7e90, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  BombInfo: {fileID: 114760416156784776}
   HomeButton: {fileID: 114688653780722738}
   timetext: {fileID: 102482573040869436}
   datetext: {fileID: 102083392398877896}
-  appAreas:
-  - {fileID: 1688122030334322}
-  - {fileID: 1986259544673676}
-  - {fileID: 1760372348534816}
-  - {fileID: 1903869288843122}
-  - {fileID: 1765982681646684}
-  - {fileID: 1841036379622916}
-  - {fileID: 1516638404897402}
-  - {fileID: 1889884545104506}
-  - {fileID: 1632235444692898}
   screen: {fileID: 2100000, guid: d4fc12dc9beafa44e9f614b7b6ef70c7, type: 2}
   Apps: {fileID: 1617481679773358}
   phoneScreen: {fileID: 1965100312965632}
-  phoneSelectable: {fileID: 114438819271186252}
 --- !u!114 &114973171017226440
 MonoBehaviour:
   m_ObjectHideFlags: 1

@@ -8,9 +8,8 @@ using UnityEngine.Rendering;
 
 public class landlordScheduler : MonoBehaviour
 {
-    public GameObject nyapp;
     public NyappLandlord app;
-    public KMBombInfo BombInfo;
+
     public KMBombModule BombModule;
 
     public TextMesh DayText;
@@ -36,48 +35,39 @@ public class landlordScheduler : MonoBehaviour
     int todayYear = 2023;
 
     public List<DateTime> validDates = new List<DateTime>();
-    PhoneInfo phone;
+    GameObject phone;
 
-    void loadApp()
-    {
-        app = GameObject.Find("nyapp_landlordScheduler").GetComponent<NyappLandlord>();
-        app.modules.Add(this);
-        app.loadApp();
-    }
     void ActivateModule()
     {
-        
         try
         {
-            phone = GameObject.Find("NyaPhone(Clone)").GetComponent<PhoneInfo>();
-            
-            phone.OnAppLoaded += delegate ()
+            app = GameObject.Find("nyapp_landlordScheduler").GetComponent<NyappLandlord>();
+            app.modules.Add(this);
+            app.loadApp();
+        }
+        catch
+        {
+            try
             {
+                phone = GameObject.Find("NyaPhone(Clone)");
                 loadApp();
-                return false;
-            };
 
-            if (phone == null)
+                app = GameObject.Find("nyapp_landlordScheduler").GetComponent<NyappLandlord>();
+                app.modules.Add(this);
+                app.loadApp();
+            }
+            catch (Exception e)
             {
-                Debug.Log("[Landlord Scheduler] Phone not found. Passing module");
+                Debug.Log("[Landlord Scheduler Error Loading Phone] " + e);
                 BombModule.HandlePass();
             }
         }
-        catch (Exception e)
-        {
-            Debug.Log("[Landlord Scheduler Error] " + e);
-            BombModule.HandlePass();
-        }
-
-        phone.loadApp(nyapp,"landlordScheduler");
     }
-    
+
     void Start()
     {
 
         GetComponent<KMBombModule>().OnActivate += ActivateModule;
-        
-
         System.Random random = new System.Random();
 
         for (int i = 0; i < 10; i++)
@@ -127,6 +117,7 @@ public class landlordScheduler : MonoBehaviour
             UpdateDate();
             return false;
         };
+
         YearPlusButton.OnInteract += delegate ()
         {
             Year++;
@@ -140,10 +131,12 @@ public class landlordScheduler : MonoBehaviour
             return false;
         };
     }
+
     public void SetId(int id)
     {
         idText.text = "" + id;
     }
+
     void SubmitDate()
     {
         GetComponent<KMAudio>().PlayGameSoundAtTransform(KMSoundOverride.SoundEffect.ButtonPress, transform);
@@ -237,9 +230,71 @@ public class landlordScheduler : MonoBehaviour
         {
             Year = todayYear + 3;
         }
-
         YearText.text = "" + Year;
+    }
 
+    Component CopyComponent(Component original, GameObject destination)
+    {
+        try
+        {
+            System.Type type = original.GetType();
+            Component copy = destination.AddComponent(type);
+            // Copied fields can be restricted with BindingFlags
+            System.Reflection.FieldInfo[] fields = type.GetFields();
+            foreach (System.Reflection.FieldInfo field in fields)
+            {
+                field.SetValue(copy, field.GetValue(original));
+            }
+            return copy;
+        }
+        catch
+        {
+            return original;
+        }
+
+    }
+
+    public void loadApp()
+    {
+        Transform Apps = phone.transform.Find("AppArea");
+        GameObject area = null;
+
+        foreach (Transform t in Apps)
+        {
+            if (!t.name.Contains("nyapp"))
+            {
+                area = t.gameObject;
+                break;
+            }
+        }
+
+        if (area != null)
+        {
+            area.name = "nyapp_landlordScheduler";
+
+            foreach (Component c in app.GetComponents(typeof(Component)))
+            {
+                CopyComponent(c, area);
+            }
+            foreach (Transform t in app.transform)
+            {
+                t.SetParent(area.transform, false);
+            }
+            KMSelectable nyappSelectable = area.GetComponent<KMSelectable>();
+
+            nyappSelectable.OnInteract += delegate ()
+            {
+                hideHome();
+                return false;
+            };
+        }
+    }
+
+    void hideHome()
+    {
+        GameObject.Find("NyaPhone(Clone)/Date").SetActive(false);
+        GameObject.Find("NyaPhone(Clone)/Time").SetActive(false);
+        GameObject.Find("NyaPhone(Clone)/AppArea").SetActive(false);
     }
 }
 

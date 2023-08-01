@@ -19,8 +19,6 @@ public class NyappLandlord : MonoBehaviour
 
 	bool loaded = false;
 
-
-	int validIndex;
 	int runningIndex = 0;
 	bool running = false;
 	int activation = 100;
@@ -43,6 +41,9 @@ public class NyappLandlord : MonoBehaviour
 
 	string waitingreply = "";
 	bool waitingresponse = false;
+
+	Transform phoneScreenArea;
+
 	void onHome()
 	{
 		id.gameObject.SetActive(false);
@@ -56,6 +57,7 @@ public class NyappLandlord : MonoBehaviour
 
 		home = true;
 	}
+
 	public void onModulePass()
 	{
 		runningIndex--;
@@ -64,12 +66,14 @@ public class NyappLandlord : MonoBehaviour
 	{
 		if (!loaded)
 		{
+			phoneScreenArea= GameObject.Find("NyaPhone(Clone)/screenArea").transform;
+			
 			activation = UnityEngine.Random.Range(10, 30);
 			Debug.Log("======activation======" + activation);
 			loaded = true;
-			PhoneInfo phone = GameObject.Find("NyaPhone(Clone)").GetComponent<PhoneInfo>();
+			KMSelectable home = GameObject.Find("NyaPhone(Clone)/HomeButton").GetComponent<KMSelectable>();
 
-			phone.OnHomePress += delegate ()
+			home.OnInteract += delegate ()
 			{
 				onHome();
 				disableSelectables();
@@ -79,7 +83,7 @@ public class NyappLandlord : MonoBehaviour
 			nyapp = GetComponent<KMSelectable>();
 			nyapp.OnInteract += delegate () { App(); return false; };
 
-			Transform phoneScreenArea = GameObject.Find("NyaPhone(Clone)").transform.Find("screenArea");
+			
 			choice1.transform.parent.SetParent(phoneScreenArea, false);
 			choice2.transform.parent.SetParent(phoneScreenArea, false);
 			choice3.transform.parent.SetParent(phoneScreenArea, false);
@@ -386,11 +390,10 @@ public class NyappLandlord : MonoBehaviour
 	}
 	void disableSelectables()
 	{
-		GameObject phoneScreenArea = GameObject.Find("NyaPhone(Clone)").transform.Find("screenArea").gameObject;
 
-		KMSelectable selectable1 = phoneScreenArea.transform.Find("selectable_1").gameObject.GetComponent<KMSelectable>();
-		KMSelectable selectable2 = phoneScreenArea.transform.Find("selectable_2").gameObject.GetComponent<KMSelectable>();
-		KMSelectable selectable3 = phoneScreenArea.transform.Find("selectable_3").gameObject.GetComponent<KMSelectable>();
+		KMSelectable selectable1 = phoneScreenArea.Find("selectable_1").gameObject.GetComponent<KMSelectable>();
+		KMSelectable selectable2 = phoneScreenArea.Find("selectable_2").gameObject.GetComponent<KMSelectable>();
+		KMSelectable selectable3 = phoneScreenArea.Find("selectable_3").gameObject.GetComponent<KMSelectable>();
 
 		selectable1.gameObject.SetActive(false);
 		selectable2.gameObject.SetActive(false);
@@ -468,11 +471,9 @@ public class NyappLandlord : MonoBehaviour
 		response.transform.parent.gameObject.SetActive(response.text.Count() > 0);
 		reply.transform.parent.gameObject.SetActive(reply.text.Count() > 0);
 
-		GameObject phoneScreenArea = GameObject.Find("NyaPhone(Clone)").transform.Find("screenArea").gameObject;
-
-		KMSelectable selectable1 = phoneScreenArea.transform.Find("selectable_1").gameObject.GetComponent<KMSelectable>();
-		KMSelectable selectable2 = phoneScreenArea.transform.Find("selectable_2").gameObject.GetComponent<KMSelectable>();
-		KMSelectable selectable3 = phoneScreenArea.transform.Find("selectable_3").gameObject.GetComponent<KMSelectable>();
+		KMSelectable selectable1 = phoneScreenArea.Find("selectable_1").gameObject.GetComponent<KMSelectable>();
+		KMSelectable selectable2 = phoneScreenArea.Find("selectable_2").gameObject.GetComponent<KMSelectable>();
+		KMSelectable selectable3 = phoneScreenArea.Find("selectable_3").gameObject.GetComponent<KMSelectable>();
 
 		selectable1.gameObject.SetActive(choice1.text.Count() > 0);
 		selectable2.gameObject.SetActive(choice2.text.Count() > 0);
@@ -489,9 +490,9 @@ public class NyappLandlord : MonoBehaviour
 		selectable3.transform.position = choice3.transform.parent.position;
 		selectable3.transform.localScale = choice3.transform.parent.localScale;
 
-		selectable1 = phoneScreenArea.transform.Find("selectable_1").gameObject.GetComponent<KMSelectable>();
-		selectable2 = phoneScreenArea.transform.Find("selectable_2").gameObject.GetComponent<KMSelectable>();
-		selectable3 = phoneScreenArea.transform.Find("selectable_3").gameObject.GetComponent<KMSelectable>();
+		selectable1 = phoneScreenArea.Find("selectable_1").gameObject.GetComponent<KMSelectable>();
+		selectable2 = phoneScreenArea.Find("selectable_2").gameObject.GetComponent<KMSelectable>();
+		selectable3 = phoneScreenArea.Find("selectable_3").gameObject.GetComponent<KMSelectable>();
 
 		selectable1.OnInteract += delegate ()
 		{

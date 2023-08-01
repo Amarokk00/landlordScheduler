@@ -755,6 +755,7 @@ GameObject:
   - component: {fileID: 114016119432772590}
   - component: {fileID: 114083205629731990}
   - component: {fileID: 114282643501372984}
+  - component: {fileID: 114737446210501272}
   m_Layer: 0
   m_Name: landlordScheduler
   m_TagString: Untagged
@@ -3583,9 +3584,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 23211f8cb415eb14fba65e529fa87b87, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  nyapp: {fileID: 1376717299798864}
   app: {fileID: 114397493468173310}
-  BombInfo: {fileID: 114016119432772590}
   BombModule: {fileID: 114825098575475566}
   DayText: {fileID: 102421092878408914}
   DayMinusButton: {fileID: 114026451674384838}
@@ -3990,6 +3989,18 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   ShaderNames:
   - Standard
+--- !u!114 &114737446210501272
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1894727570148910}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: cf70d8fa31b19b84f99686c9ea99510c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  PhoneExist: 0
 --- !u!114 &114746822453431206
 MonoBehaviour:
   m_ObjectHideFlags: 1
